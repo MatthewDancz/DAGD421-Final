@@ -1,0 +1,4 @@
+class Voxel_Map
+{
+  
+}
