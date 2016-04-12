@@ -1,20 +1,29 @@
 
-float w = 100;
-float h = 100;
-float d = 100;
-
-PVector lightBox = new PVector(w, h, d);
+PVector lightBox = new PVector(100, 100, 100);
 PVector oceanBlue = new  PVector(28, 107, 160);
 PVector sandyBottom = new PVector(194, 178, 128);
-PVector Ground = new PVector(w, 2, d);
+PVector Ground = new PVector(100, 2, 100);
 
 Camera cam = new Camera();
 
-ReefGrowth reef = new ReefGrowth(new PVector(0,0), 2);
+ReefGrowth reef;
+
+ReefGrowth[] Corals = new ReefGrowth[10];
 
 void setup()
 {
   size(800, 500, P3D);
+  reef = new ReefGrowth(new PVector(0, 0));
+  Corals[0] = reef;
+  
+  for(int i = 0; i < 10; i++)
+  {
+    if (i > 0)
+    {
+      ReefGrowth newGrowth = new ReefGrowth(new PVector(Corals[0].position.x + random(-20, 20), Corals[0].position.y + random(-20, 0), Corals[0].position.z + random(-20, 20)));
+      Corals[i] = newGrowth;
+    }
+  }
 }
 
 void draw()
@@ -27,12 +36,21 @@ void draw()
   translate(0, 0, 400);
   noFill();
   stroke(255);
-  box(w, h, d);
+  box(lightBox.x, lightBox.y, lightBox.z);
   translate(0, 49, 0);
   fill(sandyBottom.x, sandyBottom.y, sandyBottom.z);
   box(Ground.x, Ground.y, Ground.z);
   popMatrix();
   
-  reef.grow();
-  reef.drawCoral(reef.radius);
+  Corals[0].grow();
+  Corals[0].drawCoral();
+  
+  for(int i = 0; i < Corals.length - 1; i++)
+  {
+    if (Corals[i].radius > 15)
+    {
+      Corals[i + 1].grow();
+      Corals[i + 1].drawCoral();
+    }
+  }
 }
