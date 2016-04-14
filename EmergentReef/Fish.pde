@@ -5,6 +5,7 @@ public class Fish
   float neighborCount = 0;
   PVector location;
   PVector acceleration;
+  PVector Color = new PVector(random(0, 255), random(0, 255), random(0, 255));
   float r;
   float maxForce;
   float maxSpeed;
@@ -76,7 +77,7 @@ public class Fish
   public void render()
   {
     float theta = vFish.heading()+radians(90);
-    fill(random(0, 255), random(0, 255), random(0, 255));
+    fill(this.Color.x, this.Color.y, this.Color.z);
     stroke(255);
     pushMatrix();
     translate(location.x, location.y, location.z);
