@@ -10,11 +10,14 @@ ReefGrowth reef;
 
 ReefGrowth[] Corals = new ReefGrowth[10];
 
+SchoolOfFish coolfish=new SchoolOfFish();
+
 void setup()
 {
   size(800, 500, P3D);
   reef = new ReefGrowth(new PVector(0, 0));
   Corals[0] = reef;
+  coolfish.fishsetup();
   
   for(int i = 0; i < 10; i++)
   {
@@ -33,7 +36,9 @@ void draw()
   //World
   cam.update();
   pushMatrix();
-  translate(0, 0, 400);
+  translate(-50, -50, 350);
+  coolfish.fishdraw();
+  translate(50, 50, 50);
   noFill();
   stroke(255);
   box(lightBox.x, lightBox.y, lightBox.z);
