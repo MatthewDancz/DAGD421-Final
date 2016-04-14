@@ -1,14 +1,12 @@
-public class ReefGrowth extends Fish
+public class ReefGrowth
 {
   public float Radius = 2;
   float CoralGrowth = .025;
-  PVector direction;
+  PVector location;
   
-  public ReefGrowth(PVector v)
+  ReefGrowth(PVector v)
   {
-    super(v);
-    maxSpeed = 0;
-    maxForce = 1;
+    location = v;
   }
   
   void grow()
@@ -19,12 +17,12 @@ public class ReefGrowth extends Fish
     }
   }
   
-  void drawCoral()
+  public void render()
   {
     pushMatrix();
-    noStroke();
-    fill(0, 255, 0);
-    translate(this.location.x + this.Radius, this.location.y + 49, this.location.z + 400);
+    stroke(0, 255, 0);
+    noFill();
+    translate(this.location.x, this.location.y + 48, this.location.z + 400);
     sphere(this.Radius);
     popMatrix();
   }

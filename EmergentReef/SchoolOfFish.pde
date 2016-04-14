@@ -19,16 +19,12 @@ class SchoolOfFish
   }
   void fishdraw()
   {
+    
     schoolfish.swim();
     
   }
   void moreFish()
   {
-    schoolfish.addFish(new Fish(new PVector(0,0,400)));
-  }
-  
-  void addCoral(ReefGrowth c)
-  {
-    schoolfish.addCoral(c);
+    schoolfish.addFish(new Fish(new PVector(0, 0, 400)));
   }
 }

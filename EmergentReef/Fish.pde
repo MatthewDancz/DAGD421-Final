@@ -2,7 +2,7 @@
 public class Fish
 {
   PVector vFish;
-  float neighborCount=0;
+  float neighborCount = 0;
   PVector location;
   PVector acceleration;
   float r;
@@ -13,7 +13,7 @@ public class Fish
 
   Fish(PVector v)
   {
-    acceleration=new PVector(0, 0);
+    acceleration = new PVector(0, 0);
 
     float angle = random(TWO_PI);
     vFish = new PVector(cos(angle), sin(angle), angle);
@@ -73,10 +73,10 @@ public class Fish
     if (location.y > 100 + r) location.y = -r;
     if (location.z > 100 + r) location.z = -r;
   }
-  void render()
+  public void render()
   {
-    float theta=vFish.heading()+radians(90);
-    fill(200, 100);
+    float theta = vFish.heading()+radians(90);
+    fill(random(0, 255), random(0, 255), random(0, 255));
     stroke(255);
     pushMatrix();
     translate(location.x, location.y, location.z);
@@ -90,15 +90,15 @@ public class Fish
   }
   PVector seperate (ArrayList<Fish> fishes)
   {
-    float desiredseperation=25;
-    PVector steer=new PVector(0,0,0);
-    int count=0;
+    float desiredseperation = 25;
+    PVector steer = new PVector(0,0,0);
+    int count = 0;
     for(Fish other:fishes)
     {
-      float d =PVector.dist(location,other.location);
+      float d = PVector.dist(location,other.location);
       if((d>0)&&(d<desiredseperation))
       {
-        PVector diff=PVector.sub(location,other.location);
+        PVector diff = PVector.sub(location,other.location);
         diff.normalize();
         diff.div(d);
         steer.add(diff);
@@ -120,19 +120,19 @@ public class Fish
   }
   PVector align(ArrayList<Fish> fishes)
   {
-    float neighbors=50;
-    PVector sum=new PVector(0,0);
-    int count=0;
+    float neighbors = 50;
+    PVector sum = new PVector(0,0);
+    int count = 0;
     for(Fish other:fishes)
     {
       float d =PVector.dist(location,other.location);
-      if((d>0)&&(d<neighbors))
+      if((d>0) && (d<neighbors))
       {
         sum.add(other.vFish);
         count++;
       }
     }
-    if(count>0)
+    if(count > 0)
     {
       sum.div((float)count);
       sum.normalize();

@@ -10,14 +10,13 @@ ReefGrowth reef;
 
 ReefGrowth[] Corals = new ReefGrowth[10];
 
-SchoolOfFish coolfish=new SchoolOfFish();
+SchoolOfFish coolfish = new SchoolOfFish();
 
 void setup()
 {
   size(800, 500, P3D);
-  reef = new ReefGrowth(new PVector(0, 0));
+  reef = new ReefGrowth(new PVector(0, 0, 0));
   Corals[0] = reef;
-  coolfish.addCoral(reef);
   coolfish.fishsetup();
   
   for(int i = 0; i < 10; i++)
@@ -26,7 +25,6 @@ void setup()
     {
       ReefGrowth newGrowth = new ReefGrowth(new PVector(Corals[0].location.x + random(-20, 20), Corals[0].location.y + random(-20, 0), Corals[0].location.z + random(-20, 20)));
       Corals[i] = newGrowth;
-      coolfish.addCoral(newGrowth);
     }
   }
 }
@@ -50,14 +48,14 @@ void draw()
   popMatrix();
   
   Corals[0].grow();
-  Corals[0].drawCoral();
+  Corals[0].render();
   
   for(int i = 0; i < Corals.length - 1; i++)
   {
     if (Corals[i].Radius > 15)
     {
       Corals[i + 1].grow();
-      Corals[i + 1].drawCoral();
+      Corals[i + 1].render();
     }
   }
 }
