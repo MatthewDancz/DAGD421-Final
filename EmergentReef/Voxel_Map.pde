@@ -1,4 +1,0 @@
-class Voxel_Map
-{
-  
-}

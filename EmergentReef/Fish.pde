@@ -1,27 +1,27 @@
 
-class Fish
+public class Fish
 {
-  PVector vfish;
-  float neighborcount=0;
+  PVector vFish;
+  float neighborCount=0;
   PVector location;
   PVector acceleration;
   float r;
-  float maxforce;
-  float maxspeed;
+  float maxForce;
+  float maxSpeed;
 
 
 
-  Fish(float x, float y,float z)
+  Fish(PVector v)
   {
     acceleration=new PVector(0, 0);
 
-    float angle=random(TWO_PI);
-    vfish =new PVector(cos(angle), sin(angle), angle);
+    float angle = random(TWO_PI);
+    vFish = new PVector(cos(angle), sin(angle), angle);
 
-    location=new PVector(x, y, z);
+    location = new PVector(v.x, v.y, v.z);
     r = 2;
-    maxspeed = 2;
-    maxforce = .3;
+    maxSpeed = 2;
+    maxForce = .3;
   }
   void swim(ArrayList<Fish> fishes)
   {
@@ -50,18 +50,18 @@ class Fish
   }
   void update()
   {
-    vfish.add(acceleration);
-    vfish.limit(maxspeed);
-    location.add(vfish);
+    vFish.add(acceleration);
+    vFish.limit(maxSpeed);
+    location.add(vFish);
     acceleration.mult(0);
   }
   PVector seek(PVector target)
   {
     PVector desired = PVector.sub(target, location);
     desired.normalize();
-    desired.mult(maxspeed);
-    PVector steer=PVector.sub(desired, vfish);
-    steer.limit(maxforce);
+    desired.mult(maxSpeed);
+    PVector steer=PVector.sub(desired, vFish);
+    steer.limit(maxForce);
     return steer;
   }
   void borders()
@@ -72,11 +72,10 @@ class Fish
     if (location.x > 100 + r) location.x = -r;
     if (location.y > 100 + r) location.y = -r;
     if (location.z > 100 + r) location.z = -r;
-    
   }
   void render()
   {
-    float theta=vfish.heading()+radians(90);
+    float theta=vFish.heading()+radians(90);
     fill(200, 100);
     stroke(255);
     pushMatrix();
@@ -113,9 +112,9 @@ class Fish
     if(steer.mag()>0)
     {
       steer.normalize();
-      steer.mult(maxspeed);
-      steer.sub(vfish);
-      steer.limit(maxforce);
+      steer.mult(maxSpeed);
+      steer.sub(vFish);
+      steer.limit(maxForce);
     }
     return steer;
   }
@@ -129,7 +128,7 @@ class Fish
       float d =PVector.dist(location,other.location);
       if((d>0)&&(d<neighbors))
       {
-        sum.add(other.vfish);
+        sum.add(other.vFish);
         count++;
       }
     }
@@ -137,9 +136,9 @@ class Fish
     {
       sum.div((float)count);
       sum.normalize();
-      sum.mult(maxspeed);
-      PVector steer=PVector.sub(sum,vfish);
-      steer.limit(maxforce);
+      sum.mult(maxSpeed);
+      PVector steer=PVector.sub(sum,vFish);
+      steer.limit(maxForce);
       return steer;
     }
     else

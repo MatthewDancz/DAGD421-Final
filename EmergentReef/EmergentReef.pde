@@ -17,14 +17,16 @@ void setup()
   size(800, 500, P3D);
   reef = new ReefGrowth(new PVector(0, 0));
   Corals[0] = reef;
+  coolfish.addCoral(reef);
   coolfish.fishsetup();
   
   for(int i = 0; i < 10; i++)
   {
     if (i > 0)
     {
-      ReefGrowth newGrowth = new ReefGrowth(new PVector(Corals[0].position.x + random(-20, 20), Corals[0].position.y + random(-20, 0), Corals[0].position.z + random(-20, 20)));
+      ReefGrowth newGrowth = new ReefGrowth(new PVector(Corals[0].location.x + random(-20, 20), Corals[0].location.y + random(-20, 0), Corals[0].location.z + random(-20, 20)));
       Corals[i] = newGrowth;
+      coolfish.addCoral(newGrowth);
     }
   }
 }
@@ -52,7 +54,7 @@ void draw()
   
   for(int i = 0; i < Corals.length - 1; i++)
   {
-    if (Corals[i].radius > 15)
+    if (Corals[i].Radius > 15)
     {
       Corals[i + 1].grow();
       Corals[i + 1].drawCoral();
