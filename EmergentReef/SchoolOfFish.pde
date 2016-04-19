@@ -1,8 +1,8 @@
 
 class SchoolOfFish
 {
-  int schoolSize = 12;
-  int fishToAdd = 4;
+  int schoolSize = 500;
+  int fishToAdd = 0;
   
   School schoolfish =new School();
   void fishsetup()

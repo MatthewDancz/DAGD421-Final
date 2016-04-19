@@ -28,7 +28,7 @@ public class Fish
   {
     schoolfish(fishes);
     update();
-    borders();
+    borders(10);
     render();
   }
   void applyForce(PVector force)
@@ -65,14 +65,14 @@ public class Fish
     steer.limit(maxForce);
     return steer;
   }
-  void borders()
+  void borders(float s)
   {
-    if (location.x < -r) location.x = 100 + r;
-    if (location.y < -r) location.y = 100 + r;
-    if (location.z < -r) location.z = 400 + r;
-    if (location.x > 100 + r) location.x = -r;
-    if (location.y > 100 + r) location.y = -r;
-    if (location.z > 100 + r) location.z = -r;
+    if (location.x < -r) location.x = 100 * s + r;
+    if (location.y < -r) location.y = 100 * s  + r;
+    if (location.z < -r) location.z = 400 * s + r;
+    if (location.x > 100 * s + r) location.x = -r;
+    if (location.y > 100 * s + r) location.y = -r;
+    if (location.z > 100 * s + r) location.z = -r;
   }
   public void render()
   {
