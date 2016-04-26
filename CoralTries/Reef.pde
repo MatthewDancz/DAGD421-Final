@@ -34,7 +34,9 @@ class Reef
         Position.x + random(-ReefSize, ReefSize),
         Position.y,
         Position.z + random(-ReefSize, ReefSize)),
-      new PVector(random(0, 256), random(0, 256), random(0, 256)));
+      new PVector(random(0, 256), random(0, 256), random(0, 256)),
+      random(3, 8),
+      random(20, 50));
     corals.add(newCoral);
   }
   

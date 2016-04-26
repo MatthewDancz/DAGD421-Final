@@ -2,7 +2,6 @@ class Polyp
 {
   PVector Position;
   PVector Color;
-  float spawnTime;
   
   Polyp(PVector v, PVector c)
   {

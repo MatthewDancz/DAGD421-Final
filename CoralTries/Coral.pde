@@ -1,31 +1,35 @@
 
 class Coral
 {
+  float CoralMembers;
+  float CoralSize;
   PVector Position;
   PVector Color;
   ArrayList<Polyp> coral = new ArrayList<Polyp>();
   
-  Coral(PVector v, PVector c)
+  Coral(PVector v, PVector c, float n, float m)
   {
     Position = v;
     Color = c;
+    CoralMembers = n;
+    CoralSize = m;
   }
   
   void populateCoral()
   {
-    addPolyp();
-    addPolyp();
-    addPolyp();
-    addPolyp();
+    for (int i = 0; i < CoralMembers; i++)
+    {
+      addPolyp();
+    }
   }
   
   void addPolyp()
   {
     Polyp newPolyp = new Polyp(
       new PVector(
-        Position.x + random(-50, 50),
-        Position.y + random(-50, 0),
-        Position.z + random(-50, 50)),
+        Position.x + random(-CoralSize, CoralSize),
+        Position.y + random(-CoralSize, 0),
+        Position.z + random(-CoralSize, CoralSize)),
       new PVector(Color.x, Color.y, Color.z));
     coral.add(newPolyp);
   }
