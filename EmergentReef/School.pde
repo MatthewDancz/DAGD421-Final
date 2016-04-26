@@ -1,8 +1,8 @@
 
 class School
 {
-  
    public ArrayList<Fish> fishes=new ArrayList<Fish>();
+   
    void swim()
    {
      for(Fish f:fishes)
@@ -13,6 +13,7 @@ class School
        }
      }
    }
+   
    void addFish(Fish f)
    {
      fishes.add(f);
