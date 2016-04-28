@@ -5,19 +5,21 @@ public class Fish
   float neighborCount = 0;
   PVector location;
   PVector acceleration;
-  PVector Color = new PVector(random(0, 255), random(0, 255), random(0, 255));
+  PVector Color;
   float r;
   float maxForce;
   float maxSpeed;
   float sc=3;
 
-  Fish(PVector v)
+  Fish(PVector v, PVector n)
   {
     acceleration = new PVector(0, 0);
 
     float angle = random(TWO_PI);
     vFish = new PVector(cos(angle), sin(angle), angle);
-
+    
+    Color = n;
+    
     location = new PVector(v.x, v.y, v.z);
     r = 2;
     maxSpeed = random(2, 5);

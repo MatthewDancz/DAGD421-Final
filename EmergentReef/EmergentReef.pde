@@ -8,7 +8,8 @@ Camera cam = new Camera();
 
 Reef r = new Reef(new PVector(0,0,0), 500, random(10, 50));
 
-SchoolOfFish coolfish = new SchoolOfFish(1000);
+SchoolOfFish[] coolFishes = new SchoolOfFish[10];
+SchoolOfFish coolfish;
 
 PShader texShader;
 
@@ -16,7 +17,12 @@ void setup()
 {
   size(800, 500, P3D);
   r.populateReef();
-  coolfish.fishsetup();
+  for (int i = 0; i < coolFishes.length; i++)
+  {
+    coolfish = new SchoolOfFish(200);
+    coolfish.fishsetup();
+    coolFishes[i] = coolfish;
+  }
 }
 
 void draw()
@@ -27,7 +33,12 @@ void draw()
   cam.update();
   pushMatrix();
   translate(-500, -500, 350);
-  coolfish.fishdraw();
+  
+  for (SchoolOfFish f : coolFishes)
+  {
+    f.fishdraw();
+  }
+ 
   translate(500, 500, 500);
   noFill();
   stroke(255);

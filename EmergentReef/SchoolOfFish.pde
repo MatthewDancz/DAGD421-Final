@@ -3,6 +3,7 @@ class SchoolOfFish
 {
   int schoolSize;
   int fishToAdd = 0;
+  PVector type = new PVector(random(0, 255), random(0, 255), random(0, 255));
   
   School schoolfish =new School();
   
@@ -15,7 +16,7 @@ class SchoolOfFish
   {
     for (int i = 0; i < schoolSize; i++)
     {
-      schoolfish.addFish(new Fish(new PVector(width/2, height/2,400)));
+      schoolfish.addFish(new Fish(new PVector(width/2, height/2,400), type));
     }
     for(int i = 0; i < fishToAdd; i++)
     {
@@ -30,6 +31,6 @@ class SchoolOfFish
   
   void moreFish()
   {
-    schoolfish.addFish(new Fish(new PVector(0, 0, 400)));
+    schoolfish.addFish(new Fish(new PVector(0, 0, 400), type));
   }
 }
