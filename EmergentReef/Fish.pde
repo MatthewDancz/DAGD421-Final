@@ -26,7 +26,7 @@ public class Fish
     r = 2;
     sc = x;
     
-    maxSpeed = (random(3, 5) * sc - 4)/sc;
+    maxSpeed = (random(2, 4) * sc)/(1.5 * sc);
     maxForce = .3;
   }
   void swim(ArrayList<Fish> fishes)
