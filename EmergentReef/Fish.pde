@@ -10,6 +10,8 @@ public class Fish
   float maxForce;
   float maxSpeed;
   float sc=3;
+  float foo = 500;
+  boolean avoidWalls=true;
 
   Fish(PVector v, PVector n)
   {
@@ -27,9 +29,15 @@ public class Fish
   }
   void swim(ArrayList<Fish> fishes)
   {
+    acceleration.add(PVector.mult(avoid(new PVector(location.x, 1.98 * foo, location.z),true),5));
+    acceleration.add(PVector.mult(avoid(new PVector(location.x, 0, location.z),true),5));
+    acceleration.add(PVector.mult(avoid(new PVector(foo,location.y,location.z),true),5));
+    acceleration.add(PVector.mult(avoid(new PVector(-foo,location.y,location.z),true),5));
+    acceleration.add(PVector.mult(avoid(new PVector(location.x, location.y, foo),true),5));
+    acceleration.add(PVector.mult(avoid(new PVector(location.x, location.y, -foo),true),5));
     schoolfish(fishes);
     update();
-    borders(1000);
+    borders(2 * foo);
     render();
   }
   
@@ -71,14 +79,26 @@ public class Fish
     return steer;
   }
   
+  PVector avoid(PVector target, boolean weight)
+  {
+    PVector steer = new PVector();
+    steer.set(PVector.sub(location,target));
+    if(weight)
+    {
+      steer.mult(1/sq(PVector.dist(location, target)));
+      steer.limit(maxForce);
+    }
+    return steer;  
+  }
+  
   void borders(float s)
   {
-    if (location.x < -r) { location.x = s + r; }
+    if (location.x < -foo -r) { location.x = s + r; }
     if (location.y < -r) { location.y = s + r; }
-    if (location.z < -r) { location.z = s + r; }
-    if (location.x > s + r) { location.x = -r; }
+    if (location.z < -foo -r) { location.z = s + r; }
+    if (location.x > s - foo + r) { location.x = -r; }
     if (location.y > s + r) { location.y = -r; }
-    if (location.z > s + r) { location.z = -r; }
+    if (location.z > s - foo + r) { location.z = -r; }
   }
   
   public void render()
@@ -110,7 +130,7 @@ public class Fish
   
   PVector seperate (ArrayList<Fish> fishes)
   {
-    float desiredseperation = 20;
+    float desiredseperation = 25;
     PVector steer = new PVector(0,0,0);
     int count = 0;
     for(Fish other:fishes)

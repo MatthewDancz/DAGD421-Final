@@ -4,8 +4,10 @@ class Reef
   PVector Position;
   float ReefSize;
   float ReefMembers;
+  float rockNumbers = random(3, 5);
   
   ArrayList<Coral> corals = new ArrayList<Coral>();
+  ArrayList<Rock> Rocks = new ArrayList<Rock>();
   
   Reef(PVector v, float size, float members)
   {
@@ -24,6 +26,11 @@ class Reef
     for (Coral c : corals)
     {
       c.populateCoral();
+    }
+    
+    for(int i = 0; i < rockNumbers; i++)
+    {
+      addRock();
     }
   }
   
@@ -46,5 +53,16 @@ class Reef
     {
       c.drawCoral();
     }
+    
+    for (Rock r : Rocks)
+    {
+      r.drawRock();
+    }
+  }
+  
+  void addRock()
+  {
+    Rock newRock = new Rock();
+    Rocks.add(newRock);
   }
 }

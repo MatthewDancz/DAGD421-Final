@@ -39,7 +39,7 @@ void draw()
     f.fishdraw();
   }
  
-  translate(500, 500, 500);
+  translate(0, 500, 0);
   noFill();
   stroke(255);
   box(lightBox.x, lightBox.y, lightBox.z);
