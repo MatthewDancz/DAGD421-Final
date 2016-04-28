@@ -9,11 +9,11 @@ public class Fish
   float r;
   float maxForce;
   float maxSpeed;
-  float sc=3;
+  float sc;
   float foo = 500;
   boolean avoidWalls=true;
 
-  Fish(PVector v, PVector n)
+  Fish(PVector v, PVector n, float x)
   {
     acceleration = new PVector(0, 0);
 
@@ -24,7 +24,9 @@ public class Fish
     
     location = new PVector(v.x, v.y, v.z);
     r = 2;
-    maxSpeed = random(2, 5);
+    sc = x;
+    
+    maxSpeed = (random(3, 5) * sc - 4)/sc;
     maxForce = .3;
   }
   void swim(ArrayList<Fish> fishes)
@@ -189,7 +191,7 @@ public class Fish
   }
   
   PVector cohesion (ArrayList<Fish> fishes) {
-    float neighbordist = 60;
+    float neighbordist = 35;
     PVector sum = new PVector(0, 0);   // Start with empty vector to accumulate all locations
     int count = 0;
     for (Fish other : fishes) {

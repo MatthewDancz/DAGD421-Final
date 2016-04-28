@@ -19,7 +19,7 @@ void setup()
   r.populateReef();
   for (int i = 0; i < coolFishes.length; i++)
   {
-    coolfish = new SchoolOfFish(200);
+    coolfish = new SchoolOfFish(random(1, 5));
     coolfish.fishsetup();
     coolFishes[i] = coolfish;
   }
