@@ -21,10 +21,10 @@ class Particle
   
   void Display()
   {
-    noStroke();
     borders(500);
     pushMatrix();
     translate(Position.x, Position.y, Position.z);
+    rotate(random(TWO_PI));
     ellipse(0, 0, snowHeight, snowWidth);
     popMatrix();
   }
@@ -32,7 +32,7 @@ class Particle
   void borders(float s)
   {
     if (Position.x < -s) { Position.x = s; }
-    if (Position.y < -s) { Position.y = s; }
+    if (Position.y < -s) { Position.y = s; Position.x = random(-s, s); Position.z = random(-s, s); }
     if (Position.z < -s) { Position.z = s; }
     if (Position.x > s) { Position.x = -s; }
     if (Position.y > s) { Position.y = -s; }

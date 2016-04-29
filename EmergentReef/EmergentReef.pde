@@ -60,9 +60,11 @@ void draw()
   
   if (bubbleCount < 4)
   {
-    float bubbleSize = random(30, 50);
+    float bubbleSize = random(5, 8);
     bubbles[bubbleCount] = new Particle(bubbleSize, bubbleSize, 10, bubbleCount, 900);
+    bubbleSize = random(5, 8);
     bubbles[bubbleCount] = new Particle(bubbleSize, bubbleSize, 10, bubbleCount, 900);
+    bubbleSize = random(5, 8);
     bubbles[bubbleCount] = new Particle(bubbleSize, bubbleSize, 10, bubbleCount, 900);
     bubbleCount++;
   }
@@ -70,7 +72,6 @@ void draw()
   //World
   cam.update();
   pushMatrix();
-  //translate(-500, -500, 350);
   
   //For the fish.
   for (SchoolOfFish f : coolFishes)
@@ -86,6 +87,7 @@ void draw()
       n.Position.y = n.Position.y + n.fallSpeed; 
       n.Position.x = n.Position.x + offSetX;
       n.Position.z = n.Position.z;
+      noStroke();
       fill(sandyBottom.x, sandyBottom.y, sandyBottom.z);
       n.Display();
       if (n.MeltingPoint() > 1000)
@@ -103,8 +105,8 @@ void draw()
       n.Position.y = n.Position.y - n.fallSpeed; 
       n.Position.x = n.Position.x;
       n.Position.z = n.Position.z;
-      noFill();
       stroke(255);
+      noFill();
       n.Display();
       if (n.MeltingPoint() > 1000)
       {
