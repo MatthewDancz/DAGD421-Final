@@ -11,6 +11,7 @@ public class Fish
   float maxSpeed;
   float sc;
   float foo = 500;
+  float colorDifference = 30;
   boolean avoidWalls=true;
 
   Fish(PVector v, PVector n, float x)
@@ -20,7 +21,7 @@ public class Fish
     float angle = random(TWO_PI);
     vFish = new PVector(cos(angle), sin(angle), angle);
     
-    Color = n;
+    Color = new PVector(n.x + random(-colorDifference, colorDifference), n.y + random(-colorDifference, colorDifference), n.z + random(-colorDifference, colorDifference));
     
     location = new PVector(v.x, v.y, v.z);
     r = 2;
@@ -31,15 +32,15 @@ public class Fish
   }
   void swim(ArrayList<Fish> fishes)
   {
-    acceleration.add(PVector.mult(avoid(new PVector(location.x, 1.98 * foo, location.z),true),5));
-    acceleration.add(PVector.mult(avoid(new PVector(location.x, 0, location.z),true),5));
-    acceleration.add(PVector.mult(avoid(new PVector(foo,location.y,location.z),true),5));
-    acceleration.add(PVector.mult(avoid(new PVector(-foo,location.y,location.z),true),5));
-    acceleration.add(PVector.mult(avoid(new PVector(location.x, location.y, foo),true),5));
-    acceleration.add(PVector.mult(avoid(new PVector(location.x, location.y, -foo),true),5));
+    acceleration.add(PVector.mult(avoid(new PVector(location.x, foo, location.z), true), 5));
+    acceleration.add(PVector.mult(avoid(new PVector(location.x, -foo, location.z), true), 5));
+    acceleration.add(PVector.mult(avoid(new PVector(foo, location.y, location.z), true), 5));
+    acceleration.add(PVector.mult(avoid(new PVector(-foo, location.y, location.z), true), 5));
+    acceleration.add(PVector.mult(avoid(new PVector(location.x, location.y, foo), true), 5));
+    acceleration.add(PVector.mult(avoid(new PVector(location.x, location.y, -foo), true), 5));
     schoolfish(fishes);
     update();
-    borders(2 * foo);
+    borders(foo);
     render();
   }
   
@@ -84,7 +85,7 @@ public class Fish
   PVector avoid(PVector target, boolean weight)
   {
     PVector steer = new PVector();
-    steer.set(PVector.sub(location,target));
+    steer.set(PVector.sub(location, target));
     if(weight)
     {
       steer.mult(1/sq(PVector.dist(location, target)));
@@ -95,12 +96,12 @@ public class Fish
   
   void borders(float s)
   {
-    if (location.x < -foo -r) { location.x = s + r; }
-    if (location.y < -r) { location.y = s + r; }
-    if (location.z < -foo -r) { location.z = s + r; }
-    if (location.x > s - foo + r) { location.x = -r; }
-    if (location.y > s + r) { location.y = -r; }
-    if (location.z > s - foo + r) { location.z = -r; }
+    if (location.x < -s) { location.x = s; }
+    if (location.y < -s) { location.y = s; }
+    if (location.z < -s) { location.z = s; }
+    if (location.x > s) { location.x = -s; }
+    if (location.y > s) { location.y = -s; }
+    if (location.z > s) { location.z = -s; }
   }
   
   public void render()

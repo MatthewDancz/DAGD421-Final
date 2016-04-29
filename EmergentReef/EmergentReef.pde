@@ -22,12 +22,13 @@ SchoolOfFish coolfish;
 
 Particle[] particles = new Particle[10000];
 int count = 0;
+
 float offSetZ;
 float offSetX;
 float theta;
 
 Particle[] bubbles = new Particle[60];
-
+int bubbleCount = 0;
 PShader texShader;
 
 void setup()
@@ -53,14 +54,23 @@ void draw()
   
   if (count < 2000)
   {
-    particles[count] = new Particle(random(2, 5), random(2, 5), random(.5, 1), count);
+    particles[count] = new Particle(random(2, 5), random(2, 5), random(.5, 1), count, -1000);
     count++;
+  }
+  
+  if (bubbleCount < 4)
+  {
+    float bubbleSize = random(30, 50);
+    bubbles[bubbleCount] = new Particle(bubbleSize, bubbleSize, 10, bubbleCount, 900);
+    bubbles[bubbleCount] = new Particle(bubbleSize, bubbleSize, 10, bubbleCount, 900);
+    bubbles[bubbleCount] = new Particle(bubbleSize, bubbleSize, 10, bubbleCount, 900);
+    bubbleCount++;
   }
   
   //World
   cam.update();
   pushMatrix();
-  translate(-500, -500, 350);
+  //translate(-500, -500, 350);
   
   //For the fish.
   for (SchoolOfFish f : coolFishes)
@@ -83,9 +93,27 @@ void draw()
         n.ToMelt(true);
       }
     }
-  }
+  } //End particles
+  
+  //For the Bubbles
+  for (Particle n : bubbles)
+  {
+    if (n != null)
+    {
+      n.Position.y = n.Position.y - n.fallSpeed; 
+      n.Position.x = n.Position.x;
+      n.Position.z = n.Position.z;
+      noFill();
+      stroke(255);
+      n.Display();
+      if (n.MeltingPoint() > 1000)
+      {
+        n.ToMelt(true);
+      }
+    }
+  } //End bubbles
  
-  translate(0, 500, 0);
+  //translate(0, 500, 0);
   noFill();
   stroke(255);
   box(lightBox.x, lightBox.y, lightBox.z);

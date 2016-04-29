@@ -5,6 +5,10 @@ class Camera {
   PVector mouse = new PVector();
   float speed = 5;
   float speedTurn = 1/100.0;
+  
+  //Added to base camera code.
+  float foo = 500;
+  //Added to base camera code.
 
   Camera() {
   }
@@ -17,6 +21,7 @@ class Camera {
     handleMouse();
 
     camera(position.x, position.y, position.z, target.x, target.y, target.z, up.x, up.y, up.z);
+    borders(500);
   }
   void handleMouse() {
     float dx = mouseX - mouse.x;
@@ -87,6 +92,19 @@ class Camera {
   void moveBack(float amt) {
     move(getForward(), -amt);
   }
+  
+  //Added to base camera code.
+  void borders(float s)
+  {
+    println(position.x, position.y, position.z);
+    if (position.x < -s) { position.x = -s; }
+    if (position.y < -s) { position.y = -s; }
+    if (position.z < -s) { position.z = -s; }
+    if (position.x > s) { position.x = s; }
+    if (position.y > s) { position.y = s; }
+    if (position.z > s) { position.z = s; }
+  }
+  //Added to base camera code.
 }
 
 boolean KEY_W = false;
