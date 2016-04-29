@@ -26,6 +26,8 @@ float offSetZ;
 float offSetX;
 float theta;
 
+Particle[] bubbles = new Particle[60];
+
 PShader texShader;
 
 void setup()
@@ -49,7 +51,7 @@ void draw()
   
   background(oceanBlue.x, oceanBlue.y, oceanBlue.z);
   
-  if (true)
+  if (count < 2000)
   {
     particles[count] = new Particle(random(2, 5), random(2, 5), random(.5, 1), count);
     count++;
@@ -93,19 +95,6 @@ void draw()
   fill(sandyBottom.x, sandyBottom.y, sandyBottom.z);
   box(Ground.x, Ground.y, Ground.z);
   popMatrix();
-  
-  if (particles[0].MeltMe())
-  {
-    count--;
-    for(int i = 0; i < count; i++)
-    {
-      if (particles[i] == null)
-      {
-        break;
-      }      
-      particles[i] = particles[i + 1];
-    }
-  }
   
   theta += .01;
   offSetX = sin(theta) * 5;

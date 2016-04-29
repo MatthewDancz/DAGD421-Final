@@ -30,7 +30,11 @@ class Coral
         Position.x + random(-CoralSize, CoralSize),
         Position.y + random(-CoralSize, 0),
         Position.z + random(-CoralSize, CoralSize)),
-      new PVector(Color.x, Color.y, Color.z));
+      new PVector(
+        Color.x + random(-10, 10),
+        Color.y + random(-10, 10),
+        Color.z + random(-10, 10)),
+      random(10, 20));
     coral.add(newPolyp);
   }
   
