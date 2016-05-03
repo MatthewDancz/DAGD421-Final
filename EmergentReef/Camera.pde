@@ -21,7 +21,7 @@ class Camera {
     handleMouse();
 
     camera(position.x, position.y, position.z, target.x, target.y, target.z, up.x, up.y, up.z);
-    borders(500);
+    borders(430);
   }
   void handleMouse() {
     float dx = mouseX - mouse.x;
@@ -96,7 +96,6 @@ class Camera {
   //Added to base camera code.
   void borders(float s)
   {
-    println(position.x, position.y, position.z);
     if (position.x < -s) { position.x = -s; }
     if (position.y < -s) { position.y = -s; }
     if (position.z < -s) { position.z = -s; }

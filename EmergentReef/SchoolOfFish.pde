@@ -19,7 +19,7 @@ class SchoolOfFish
   {
     for (int i = 0; i < schoolSize; i++)
     {
-      schoolfish.addFish(new Fish(new PVector(random(-500, 500), random(-400, 400), random(-500, 500)), type, fishSize));
+      schoolfish.addFish(new Fish(new PVector(random(-500, 500), random(-400, 400), random(-500, 500)), type, fishSize, random(3, 4)));
       //schoolfish.addFish(new Fish(new PVector(0, 0, 0), type, fishSize));
     }
     for(int i = 0; i < fishToAdd; i++)
@@ -35,6 +35,6 @@ class SchoolOfFish
   
   void moreFish()
   {
-    schoolfish.addFish(new Fish(new PVector(0, 0, 400), type, fishSize));
+    schoolfish.addFish(new Fish(new PVector(0, 0, 400), type, fishSize, random(3, 4)));
   }
 }
