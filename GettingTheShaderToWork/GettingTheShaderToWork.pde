@@ -14,7 +14,7 @@ void setup() {
 }
 
 void draw() {    
-  background(125);
+  background(0);
   shader(colorShader);
   translate(width/2, height/2);
   rotateY(map(mouseX, 0, width, -PI, PI));
@@ -22,11 +22,28 @@ void draw() {
   
   colorShader.set("time", millis()/1000.0);
   
-  drawBox(n);
+
   
+  //drawBox(n);
   resetShader();
   
+  drawWall(n);
   //shape(can);  
+}
+
+void drawWall(float n)
+{
+  noStroke();
+  
+  //Front
+  beginShape();
+  //texture(img1);
+  fill(255, 0, 0, map(mouseX, -n, n, 0, 255));
+  vertex(n, n, n, 1, 1);
+  vertex(n, -n, n, 1, 0);
+  vertex(-n, -n, n, 0, 0);
+  vertex(-n, n, n, 0, 1);
+  endShape();
 }
 
 void drawBox(float n)
