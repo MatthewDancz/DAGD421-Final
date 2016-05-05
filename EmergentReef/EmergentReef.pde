@@ -34,12 +34,22 @@ Particle[] bubbles = new Particle[60];
 int bubbleCount = 0;
 PShader texShader;
 
+//gradient Shader
+PShader gradientShader;
+//End gradient Shader
+
+//Noise variables
+float z = 0;
+int dataSize = 50;
+float[][] data = new float[dataSize][dataSize];
+//End Noise variables
+
 void setup()
 {
   size(800, 500, P3D);
   img1 = loadImage("Image1.jpg");
   img2 = loadImage("surfaceClouds.jpg");
-  img3 = loadImage("water.jpg");
+  img3 = loadImage("Image1.png");
   minim = new Minim(this);
   player = minim.loadFile("Music.wav", 2048);
   player.play();
@@ -51,15 +61,30 @@ void setup()
     coolfish.fishsetup();
     coolFishes[i] = coolfish;
   }
+  
+  //load gradientShader
+  gradientShader = loadShader("water.glsl");
+  //End load gradientShader
 }
 
 void draw()
 {
   //background(img2);
   background(oceanBlue.x, oceanBlue.y, oceanBlue.z);
-  drawBackGround(500, img3);
-  drawSurface(-500, img2);
-  drawGround(500, img1);
+  
+  //Cam BackgroundShader
+  PVector look = cam.getForward();
+  float dot = look.dot(new PVector(0, -1, 0));
+  gradientShader.set("look", (dot + 1)/2);
+  filter(gradientShader);
+  //End Cam BackgroundShader
+  
+  //drawBackGround(500, img3);
+  //drawSurface(-500, img2);
+  
+  drawGround(505, img1);
+  //fluxLight();
+  //drawNoise(cam.position);
   
   if (count < 2000)
   {
@@ -67,13 +92,9 @@ void draw()
     count++;
   }
   
-  if (bubbleCount < 4)
+  if (bubbleCount < 10)
   {
     float bubbleSize = random(5, 8);
-    bubbles[bubbleCount] = new Particle(bubbleSize, bubbleSize, 10, bubbleCount, 900);
-    bubbleSize = random(5, 8);
-    bubbles[bubbleCount] = new Particle(bubbleSize, bubbleSize, 10, bubbleCount, 900);
-    bubbleSize = random(5, 8);
     bubbles[bubbleCount] = new Particle(bubbleSize, bubbleSize, 10, bubbleCount, 900);
     bubbleCount++;
   }
@@ -153,6 +174,56 @@ void drawGround(float n, PImage img)
   endShape();
 }
 
+void drawNoise(PVector v)
+{
+  for (int x = 0; x < 100; x++)
+  {
+    for(int y = 0; y < 100; y++)
+    {
+      float d = noise(x/(v.y + 500), y/(v.y + 500), z);
+      if (d < .4)
+      {
+        noFill();
+      }
+      else if (d < .5)
+      {
+        fill(255);
+      }
+      else if (d < .7)
+      {
+        noFill();
+      }
+      else
+      {
+        noFill();
+      }
+      noStroke();
+      pushMatrix();
+      //translate(-500, 504, -500);
+      translate(v.x - 50, v.y + 70, v.z - 50);
+      rotateX(PI/2);
+      rect(x, y, 1, 1);
+      popMatrix();
+    }
+  }
+}
+
+boolean zoom = false;
+
+void fluxLight()
+{
+  if (z <= 0) { zoom = true; }
+  if (z >= 100) { zoom = false; }
+  if(zoom)
+  {
+    z = z + random(.05, .1);
+  }
+  if(!zoom)
+  {
+    z = z - random(.05, .1);
+  }
+}
+/*
 void drawSurface(float n, PImage img)
 {
   //Front
@@ -205,3 +276,4 @@ void drawBackGround(float n, PImage img)
   vertex(n, -n, -n, 800, 0);
   endShape();
 }
+*/

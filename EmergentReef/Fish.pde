@@ -135,7 +135,7 @@ public class Fish
   
   PVector seperate (ArrayList<Fish> fishes)
   {
-    float desiredseperation = 30;
+    float desiredseperation = 40;
     PVector steer = new PVector(0,0,0);
     int count = 0;
     for(Fish other:fishes)

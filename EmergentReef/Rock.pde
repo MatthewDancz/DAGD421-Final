@@ -14,7 +14,7 @@ class Rock
   void drawRock()
   {
     noStroke();
-    fill(Color.x, Color.y, Color.z);
+    fill(Color.x + sin(theta) * 20, Color.y + sin(theta) * 20, Color.z + sin(theta) * 20);
     
     pushMatrix();
     translate(Position.x, Position.y, Position.z);
