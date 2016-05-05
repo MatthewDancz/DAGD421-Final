@@ -7,19 +7,24 @@ float n = 25;
 
 void setup() {
   size(500, 500, P3D);
-  img1 = loadImage("Image1.png");
+  img1 = loadImage("noise.png");
   can = createCan(100, 200, 32, img1);
+  textureWrap(REPEAT);
+  colorShader = loadShader("simpleFrag.glsl");
 }
 
 void draw() {    
   background(125);
+  shader(colorShader);
   translate(width/2, height/2);
   rotateY(map(mouseX, 0, width, -PI, PI));
   rotateX(map(-mouseY, 0, height, -PI, PI));
   
+  colorShader.set("time", millis()/1000.0);
+  
   drawBox(n);
   
-  
+  resetShader();
   
   //shape(can);  
 }

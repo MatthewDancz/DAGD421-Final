@@ -25,7 +25,7 @@ void main(){
 	vec2 uvs3 = vertTexCoord.xy + vec2(r - .5, g - .5) * .5;
 	float b = texture2D(texture, uvs3 + vec2(time * .2, 0)).b;
 
-	//vec4 color = vec4(0.5, 0.4, 0.3, 1.0);
+	vec4 color = vec4(0.5, 0.4, 0.3, 1.0);
 
 	float offset = sin(time) * .2;
 	float threshold = .5 + offset;
